@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+    <style type="text/css">
+        .boxc {
+            width: 600px;
+            height: auto;
+            margin: 100px auto;
+        }
+        caption {
+            font-weight: bold;
+            font-size: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div class="boxc">
+
+        <table border="1px" cellspacing="3px" cellpadding="3px">
+            <caption>
+                <span>当前</span>
+                <span th:text="${currentPage}"></span>
+                <span>页</span>
+            </caption>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>AGE</th>
+                <th>BIR</th>
+                <th>WORKTime</th>
+            </tr>
+            <tr th:each="temp : ${users}">
+                <td th:text="${temp.getId()}"></td>
+                <td th:text="${temp.getName()}"></td>
+                <td th:text="${temp.getAge()}"></td>
+                <td th:text="${temp.getBirthday()}"></td>
+                <td th:text="${temp.getWorkTime()}"></td>
+            </tr>
+            <tr>
+                <td><a th:href="@{/users(page=1,count=10)}">首页</a></td>
+                <td th:if="${currentPage > 1}"><a th:href="@{/users(page=${currentPage}-1,count=10)}">上一页</a></td>
+                <td><a th:href="@{/users(page=${currentPage}+1,count=10)}">下一页</a></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
